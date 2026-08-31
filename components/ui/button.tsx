@@ -38,36 +38,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   const innerRef = useRef<HTMLButtonElement>(null)
   const ref = (forwardedRef ?? innerRef) as React.RefObject<HTMLButtonElement>
 
-  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
   const [hovering, setHovering] = useState(false)
 
   const isPrimary = variant === "primary"
   const isLink = variant === "link"
 
   const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled && !loading) {
-      const el = ref.current
-      if (el) {
-        const rect = el.getBoundingClientRect()
-        const id = Date.now()
-        setRipples((prev) => [...prev, { id, x: e.clientX - rect.left, y: e.clientY - rect.top }])
-        window.setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 650)
-      }
-    }
     onMouseDown?.(e)
   }
 
   return (
     <>
-      {isPrimary && (
-        <style>{`
-          @keyframes inkly-shimmer-sweep {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-          }
-        `}</style>
-      )}
-
       <motion.button
         {...(props as any)}
         ref={ref}
@@ -91,43 +72,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
           className,
         )}
       >
-        {/* PRIMARY — shimmer, faqat hover paytida yugurtiriladi (performantroq) */}
-        {isPrimary && (
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: "linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.55) 50%, transparent 65%)",
-              backgroundSize: "200% 100%",
-              animation: `inkly-shimmer-sweep ${hovering ? "1.1s" : "2.6s"} linear infinite`,
-            }}
-          />
-        )}
-
-        {/* PRIMARY — ustki shine */}
-        {isPrimary && (
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-b from-white/15 to-transparent"
-          />
-        )}
-
-        {/* Barcha variantlar — bosilganda tarqaladigan ripple */}
-        {ripples.map((r) => (
-          <motion.span
-            key={r.id}
-            aria-hidden="true"
-            className={cn(
-              "pointer-events-none absolute rounded-full",
-              isPrimary ? "bg-white/50" : "bg-primary/25",
-            )}
-            style={{ left: r.x, top: r.y, translateX: "-50%", translateY: "-50%" }}
-            initial={{ width: 0, height: 0, opacity: 0.6 }}
-            animate={{ width: 160, height: 160, opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-        ))}
-
         {loading && <LoadingDots size="sm" />}
         <span className={cn("relative z-10 inline-flex items-center gap-2 whitespace-nowrap", loading && "opacity-70")}>
           {children}
