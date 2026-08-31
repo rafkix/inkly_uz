@@ -162,6 +162,11 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
+    text-rendering: optimizeLegibility;
+  }
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
   }
   ::selection {
     background-color: var(--color-inkly-peach);
@@ -241,6 +246,17 @@
   animation: loading-dot 1s ease-in-out infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * BUTTON SYSTEM — Lexis interaction language
@@ -268,4 +284,30 @@ button:focus-visible {
 /* Disabled cursor */
 button:disabled {
   cursor: not-allowed;
+}
+
+/* Shared public-site rhythm */
+.public-site {
+  background: var(--background);
+}
+.public-site main > section {
+  border-color: var(--border);
+}
+.public-site h1,
+.public-site h2,
+.public-site h3 {
+  text-wrap: balance;
+}
+.public-site a {
+  -webkit-tap-highlight-color: transparent;
+}
+.public-page-shell {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+@media (min-width: 640px) {
+  .public-page-shell { width: min(100% - 3.5rem, 80rem); }
+}
+@media (min-width: 1024px) {
+  .public-page-shell { width: min(100% - 4rem, 80rem); }
 }

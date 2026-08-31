@@ -24,7 +24,7 @@ const contacts = [
     link: "mailto:hello@inkly.uz",
     linkText: "hello@inkly.uz",
     linkColor: "text-text-primary",
-    palette: { iconBg: "bg-violet-50", iconFg: "text-violet-600", hoverBg: "group-hover:bg-violet-600" },
+    palette: { iconBg: "bg-accent", iconFg: "text-primary", hoverBg: "group-hover:bg-violet-600" },
   },
   {
     icon: Send,
@@ -50,7 +50,7 @@ const contacts = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background pt-16 sm:pt-[76px]">
       {/* Hero Section */}
       <section className="border-b border-border-default">
         <Container variant="marketing" className="py-24 sm:py-32">

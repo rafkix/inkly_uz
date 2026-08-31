@@ -18,8 +18,7 @@ const SOCIAL_LIST = [
   { key: "instagram", label: "Instagram",  icon: "/icons/instagram.svg", placeholder: "@username" },
   { key: "github",    label: "GitHub",     icon: "/icons/github.svg",    placeholder: "username"  },
   { key: "twitter",   label: "X (Twitter)",icon: "/icons/x.svg",         placeholder: "@username" },
-  { key: "youtube",   label: "YouTube",    icon: "/icons/youtube.svg",   placeholder: "@kanal"    },
-  { key: "linkedin",  label: "LinkedIn",   icon: "/icons/linkedin.svg",  placeholder: "username"  },
+  { key: "youtube",    label: "YouTube",    icon: "/icons/youtube.svg",   placeholder: "@kanal"    },
 ] as const
 
 type SocialKey = (typeof SOCIAL_LIST)[number]["key"]
@@ -84,7 +83,6 @@ export default function ProfileSettingsPage() {
       github: "",
       twitter: "",
       youtube: "",
-      linkedin: "",
     },
   })
 
@@ -113,7 +111,6 @@ export default function ProfileSettingsPage() {
           github: user.socials?.github ?? "",
           twitter: user.socials?.twitter ?? "",
           youtube: user.socials?.youtube ?? "",
-          linkedin: user.socials?.linkedin ?? "",
         },
       })
     }
@@ -157,7 +154,6 @@ export default function ProfileSettingsPage() {
         github_username: form.socials.github || null,
         twitter_username: form.socials.twitter || null,
         youtube_username: form.socials.youtube || null,
-        linkedin_username: form.socials.linkedin || null,
       })
       await refresh()
       setSuccess(true)

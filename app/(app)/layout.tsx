@@ -13,13 +13,14 @@ import { notificationsApi } from "@/lib/api/notifications"
 
 // ─── Nav items ────────────────────────────────────────────────────────────────
 const navItems = [
-  { href: "/dashboard",       icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/write",           icon: PenLine,         label: "Yozish" },
-  { href: "/telegram", icon: User,           label: "Telegram" },
-  { href: "/dashboard/posts", icon: BookOpen,        label: "Maqolalarim" },
-  { href: "/dashboard/settings/profile",icon: Settings,        label: "Sozlamalar" },
+  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/write", icon: PenLine, label: "Yozish" },
+  { href: "/dashboard/posts", icon: BookOpen, label: "Maqolalarim" },
+]
+
+const utilityItems = [
   { href: "/dashboard/notifications", icon: Bell, label: "Bildirishnomalar" },
-  { href: "/dashboard/settings/appearance", icon: Palette,     label: "Ko'rinish" },
+  { href: "/dashboard/settings/profile", icon: Settings, label: "Sozlamalar" },
 ]
 
 // Route → page title mapping for breadcrumb
@@ -189,7 +190,8 @@ function SearchBar() {
 function NotificationButton({ count }: { count: number }) {
   const [hovered, setHovered] = useState(false)
   return (
-    <button
+    <Link
+      href="/dashboard/notifications"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-150"
@@ -218,7 +220,7 @@ function NotificationButton({ count }: { count: number }) {
           {count > 9 ? "9+" : count}
         </span>
       )}
-    </button>
+    </Link>
   )
 }
 
@@ -459,6 +461,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             collapsed={isCollapsed}
             onNavigate={mobile ? () => setMobileOpen(false) : undefined}
           />
+          {!isCollapsed && <SectionLabel label="Hisob" />}
+          <nav className="flex flex-col gap-0.5 px-2 pb-2">
+            {utilityItems.map(({ href, icon: Icon, label }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={mobile ? () => setMobileOpen(false) : undefined}
+                title={isCollapsed ? label : undefined}
+                className={cn(
+                  "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-muted hover:text-text-primary",
+                  isCollapsed && "justify-center px-0",
+                )}
+              >
+                <Icon size={15} className="shrink-0" />
+                {!isCollapsed && <span className="truncate">{label}</span>}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* User footer */}
@@ -616,9 +636,31 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto pb-16 lg:pb-0">
           {children}
         </main>
+        <nav
+          aria-label="Mobil navigatsiya"
+          className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur lg:hidden"
+          style={{ borderColor: "var(--color-border-default)" }}
+        >
+          {navItems.map(({ href, icon: Icon, label }) => {
+            const active = isActive(pathname, href)
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  "flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl text-[11px] font-medium transition-colors",
+                  active ? "text-primary" : "text-text-muted",
+                )}
+              >
+                <Icon size={18} />
+                <span>{label}</span>
+              </Link>
+            )
+          })}
+        </nav>
       </div>
     </div>
   )

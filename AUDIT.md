@@ -78,3 +78,24 @@ Responsive prefikslar (`sm:`/`md:`/`lg:`/`xl:`) taqsimoti: `sm` — 143, `lg` �
 ---
 
 *Eslatma: bu audit statik kod ko'rib chiqishga asoslangan (loyihada `node_modules` yo'q edi, shuning uchun `next build`/vizual render orqali tekshirilmadi). Runtime/vizual tasdiqlash uchun loyihani `pnpm install && pnpm dev` bilan ishga tushirib ko'rish tavsiya etiladi.*
+
+---
+
+## 4. Cleanup execution — 2026-08-31
+
+### SAFE TO DELETE (completed)
+- `lib/api/use-safe-api.ts` — deleted. Repository-wide search found no production, route, test, config, or package reference; the only matches were its own JSDoc and a note in `safe-wrapper.ts`.
+- `response.txt` — deleted. Generated HTML response artifact; no application, route, config, test, or deployment reference was found.
+
+### HUMAN REVIEW / KEEP
+- `public/demo/cover-*.png`, `public/header.png` — retained because runtime string references exist.
+- `lib/api/*`, auth, route, config, lockfile, and framework files — retained; no safe deletion proof.
+- `AUDIT.md`, `README.md`, `CLAUDE.md` — retained as project documentation.
+
+### Baseline health
+- `npm run lint` failed before cleanup because ESLint 10 could not find `eslint.config.*`.
+- `npm run build` compiled, then failed TypeScript checks in `app/(app)/dashboard/settings/profile/page.tsx` for `SocialLinks.linkedin` and `linkedin_username`.
+
+### Post-cleanup expectations
+- No dependency, lockfile, API, UI, or business-logic changes were made.
+- Re-run repository reference scans, lint, build, and Git statistics after deletion; pre-existing lint/build failures should remain documented rather than silently changed.

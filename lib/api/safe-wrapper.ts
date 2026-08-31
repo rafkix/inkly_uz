@@ -4,7 +4,6 @@
  *
  * MUHIM: Bu fayl "use client" directive OLMAYDI.
  * React hooks (useState, useEffect) bu yerda bo'lmasligi kerak.
- * useSafeApi hook → lib/api/use-safe-api.ts (client-only)
  */
 
 import { ApiRequestError } from "./client"

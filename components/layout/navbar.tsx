@@ -74,7 +74,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-[100] w-full transition-all duration-300",
+        "fixed inset-x-0 top-0 z-[100] w-full transition-colors duration-200",
         isHiddenOnMobile && "hidden sm:block",
         scrolled
           ? "border-b border-border-default/80 bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-md"
@@ -123,7 +123,7 @@ export function Navbar() {
           <Link
             href="/search"
             aria-label="Qidirish"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-text-primary transition-colors hover:bg-inkly-orange-light hover:text-primary"
+            className="flex size-9 items-center justify-center rounded-lg text-text-primary transition-colors hover:bg-accent hover:text-primary"
           >
             <Search size={20} strokeWidth={1.8} />
           </Link>
