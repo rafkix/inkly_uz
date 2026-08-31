@@ -18,7 +18,7 @@ const features = [
     icon: Shield,
     title: "Xavfsizlik",
     text: "Ma'lumotlaringiz xavfsiz va ishonchli saqlanadi. Loyihalar ustida xavotirsiz ishlashingiz mumkin.",
-    palette: { iconBg: "bg-violet-50", iconFg: "text-violet-600" },
+    palette: { iconBg: "bg-accent", iconFg: "text-violet-600" },
   },
   {
     icon: Type,
@@ -36,7 +36,7 @@ const features = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background pt-16 sm:pt-[76px]">
       {/* Hero Section */}
       <section className="border-b border-border-default">
         <Container variant="marketing" className="py-24 sm:py-32">

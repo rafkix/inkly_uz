@@ -7,7 +7,7 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="relative isolate min-h-screen">
+    <div className="public-site relative isolate min-h-screen">
       <Navbar />
       {children}
       <ConditionalFooter />
