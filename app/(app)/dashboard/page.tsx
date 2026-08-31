@@ -4,7 +4,7 @@ import { useEffect, useReducer, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { toast } from "sonner"
-import { PenLine, Eye, Heart, MessageCircle, Trash2, Archive, MoreHorizontal, FileText, ExternalLink, RotateCcw, Send, Users, BookOpen, TrendingUp, ArrowUpRight, Globe, BarChart2, User, Palette, ChevronRight, Sparkles, Clock, Hash,  } from "lucide-react"
+import { PenLine, Eye, Heart, MessageCircle, Trash2, Archive, MoreHorizontal, FileText, ExternalLink, RotateCcw, Send, Users, BookOpen, TrendingUp, ArrowUpRight, Sparkles, Clock } from "lucide-react"
 import { useAuth } from "@/lib/auth/context"
 import { postsApi } from "@/lib/api/posts"
 import { formatDate, formatCount } from "@/lib/utils/format"
@@ -332,50 +332,6 @@ function TabBar({
   )
 }
 
-// ─── Quick Links ──────────────────────────────────────────────────────────────
-
-function QuickLinks({ username }: { username: string }) {
-  const links = [
-    { icon: Globe, label: "Blogingizni ko'rish", href: `/@${username}`, external: true },
-    { icon: User, label: "Profilni tahrirlash", href: "/dashboard/settings/profile", external: false },
-    { icon: Palette, label: "Ko'rinish sozlamalari", href: "/dashboard/settings/appearance", external: false },
-    { icon: BarChart2, label: "Barcha statistika", href: "/dashboard/posts", external: false },
-    { icon: BookOpen, label: "Barcha maqolalar", href: "/dashboard/posts", external: false },
-  ]
-  return (
-    <div
-      className="rounded-2xl bg-white"
-      style={{ border: "1px solid var(--color-border-default)" }}
-    >
-      <div
-        className="flex items-center gap-2 px-4 py-3.5"
-        style={{ borderBottom: "1px solid var(--color-inkly-orange-light)" }}
-      >
-        <Hash size={13} className="text-text-muted" />
-        <h2 className="text-sm font-semibold text-text-primary">Tezkor havolalar</h2>
-      </div>
-      <div className="p-1.5">
-        {links.map(({ icon: Icon, label, href, external }) => (
-          <Link
-            key={label}
-            href={href}
-            target={external ? "_blank" : undefined}
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-text-secondary transition-colors hover:bg-bg-muted hover:text-text-primary"
-          >
-            <Icon size={14} className="shrink-0 text-text-muted" />
-            <span className="flex-1">{label}</span>
-            {external
-              ? <ExternalLink size={11} className="text-border-default" />
-              : <ChevronRight size={12} className="text-border-default" />
-            }
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
@@ -678,39 +634,14 @@ export default function DashboardPage() {
                 </div>
               )}
 
-              {/* Quick links */}
-              <QuickLinks username={user.username} />
-
-              {/* Drafts nudge */}
               {drafts.length > 0 && (
-                <div
-                  className="rounded-2xl p-4"
-                  style={{
-                    background: "linear-gradient(135deg,rgba(255,106,0,0.06),rgba(255,138,61,0.03))",
-                    border: "1px solid rgba(255,106,0,0.18)",
-                  }}
+                <Link
+                  href="/dashboard/posts?tab=drafts"
+                  className="flex items-center justify-between rounded-2xl border border-primary/20 bg-primary/5 p-4 text-sm transition-colors hover:bg-primary/10"
                 >
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl"
-                      style={{ background: "rgba(255,106,0,0.12)", color: "var(--color-inkly-orange)" }}
-                    >
-                      <PenLine size={13} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-text-primary">
-                        {drafts.length} ta qoralama
-                      </p>
-                      <p className="mt-0.5 text-xs text-text-muted">Nashr kutmoqda</p>
-                      <Link
-                        href="/dashboard/posts"
-                        className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline underline-offset-4"
-                      >
-                        Ko'rish <ArrowUpRight size={11} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                  <span className="font-medium text-text-primary">{drafts.length} ta qoralama nashr kutmoqda</span>
+                  <ArrowUpRight size={15} className="text-primary" />
+                </Link>
               )}
 
             </div>
