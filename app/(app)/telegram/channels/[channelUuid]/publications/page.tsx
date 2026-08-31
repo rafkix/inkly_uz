@@ -1,0 +1,7 @@
+"use client"
+import { useEffect,useState } from "react"
+import { useParams } from "next/navigation"
+import { useAuth } from "@/lib/auth/context"
+import { telegramApi,type TelegramPublicationResponse } from "@/lib/api/telegram"
+import { LoadingDots } from "@/components/ui/loading-dots"
+export default function PublicationsPage(){const{state}=useAuth();const params=useParams<{channelUuid:string}>();const[items,setItems]=useState<TelegramPublicationResponse[]>([]);const[loading,setLoading]=useState(true);useEffect(()=>{if(!state.token||!params.channelUuid)return;telegramApi.publications(state.token,params.channelUuid,{page:1,page_size:50}).then(d=>setItems(d.items)).finally(()=>setLoading(false))},[state.token,params.channelUuid]);return <div className="space-y-6"><div><h1 className="text-2xl font-bold">Nashrlar</h1><p className="mt-1 text-sm text-text-muted">Telegram kanaliga yuborilgan maqolalar.</p></div><div className="rounded-2xl border border-border-default bg-white overflow-hidden">{loading?<div className="flex justify-center py-16"><LoadingDots size="lg" className="text-primary"/></div>:items.length===0?<p className="p-8 text-center text-sm text-text-muted">Hali nashrlar yo‘q.</p>:items.map(x=><div key={x.uuid} className="flex items-center justify-between border-b border-border-default p-4 last:border-0"><span className="text-sm">{x.uuid}</span><span className="rounded-full bg-bg-muted px-3 py-1 text-xs">{x.status}</span></div>)}</div></div>}

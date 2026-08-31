@@ -1,0 +1,600 @@
+/* =========================================================
+   Inkly Editor — Global Styles
+   Import this file in your layout or page component:
+   import "@/styles/inkly-editor.css"
+========================================================= */
+
+/* Loading state */
+.inkly-editor-loading {
+  min-height: 220px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 24px;
+  color: #FF6A00;
+}
+
+/* Wrapper */
+.inkly-novel-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Core editor surface ── */
+.inkly-editor-content {
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 220px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.85;
+  color: #1a1a1a;
+  outline: none;
+  padding: 0.5rem 0 1.75rem;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Placeholder */
+.inkly-editor-content .is-editor-empty:first-child::before,
+.inkly-editor-content .is-node-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: #C0C4CA;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+/* ── Paragraphs ── */
+.inkly-editor-content p {
+  margin-bottom: 1.2em;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ── Headings ── */
+.inkly-editor-content h1 {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 2em;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-top: 1.8em;
+  margin-bottom: 0.55em;
+  color: #111111;
+}
+
+.inkly-editor-content h2 {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #141414;
+}
+
+.inkly-editor-content h3 {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-top: 1.25em;
+  margin-bottom: 0.45em;
+  color: #141414;
+}
+
+/* ── Blockquote ── */
+.inkly-editor-content blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid #FF6A00;
+  background: #FFF3E8;
+  border-radius: 0 12px 12px 0;
+  color: #36565F;
+  font-style: italic;
+  font-size: 1.05em;
+  line-height: 1.75;
+}
+
+.inkly-editor-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Lists ── */
+.inkly-editor-content ul,
+.inkly-editor-content ol {
+  padding-left: 1.6rem;
+  margin-bottom: 1.3em;
+  font-family: Georgia, serif;
+}
+
+.inkly-editor-content li {
+  margin-bottom: 0.4em;
+  line-height: 1.7;
+}
+
+.inkly-editor-content ul {
+  list-style-type: disc;
+}
+
+.inkly-editor-content ol {
+  list-style-type: decimal;
+}
+
+/* ── Code ── */
+.inkly-editor-content code {
+  background: var(--color-background-muted);
+  border-radius: 5px;
+  padding: 0.15em 0.42em;
+  font-size: 0.86em;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  color: #C0392B;
+  letter-spacing: 0;
+}
+
+.inkly-editor-content pre,
+.inkly-code-block {
+  background: #171717;
+  color: #F5F5F5;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  font-size: 0.875em;
+  line-height: 1.7;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+.inkly-editor-content pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* ── Images ── */
+.inkly-image,
+.inkly-editor-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2.25rem auto;
+  border-radius: 12px;
+  cursor: default;
+}
+
+.inkly-editor-content img.ProseMirror-selectednode {
+  outline: 3px solid rgba(255, 106, 0, 0.3);
+  outline-offset: 3px;
+}
+
+/* ── Video ── */
+.inkly-video-block {
+  margin: 2.25rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.inkly-video-ratio {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.inkly-video-ratio iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Links & inline marks ── */
+.inkly-link,
+.inkly-editor-content a {
+  color: #FF6A00;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.inkly-editor-content strong {
+  color: #141414;
+  font-weight: 700;
+}
+
+.inkly-editor-content em {
+  font-style: italic;
+  color: #2a2a2a;
+}
+
+.inkly-editor-content ::selection {
+  background: rgba(255, 106, 0, 0.15);
+}
+
+.inkly-editor-content:focus {
+  outline: none;
+}
+
+/* ── Bubble menu ── */
+.inkly-bubble {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  background: #1A1A1A;
+  border-radius: 10px;
+  padding: 4px 5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.inkly-bubble-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  color: #D1D5DB;
+  transition: all 0.1s;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.inkly-bubble-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.inkly-bubble-btn--active {
+  background: rgba(255, 90, 0, 0.3);
+  color: #FF8040;
+}
+
+.inkly-bubble-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* ── Link popover ── */
+.inkly-link-popover {
+  display: flex;
+  align-items: center;
+}
+
+.inkly-link-popover-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+}
+
+.inkly-link-icon {
+  color: #9CA3AF;
+  flex-shrink: 0;
+}
+
+.inkly-link-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 13px;
+  width: 200px;
+}
+
+.inkly-link-input::placeholder {
+  color: #6B7280;
+}
+
+.inkly-link-apply,
+.inkly-link-remove,
+.inkly-link-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #9CA3AF;
+  transition: color 0.1s, background 0.1s;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.inkly-link-apply:hover {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.inkly-link-remove:hover {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+}
+
+.inkly-link-open:hover {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+}
+
+/* ── Video input popover ── */
+.inkly-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.inkly-video-popover {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 20px;
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
+}
+
+.inkly-video-popover-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.inkly-video-popover-header svg {
+  color: #FF6A00;
+}
+
+.inkly-video-close {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #9CA3AF;
+  transition: background 0.1s, color 0.1s;
+}
+
+.inkly-video-close:hover {
+  background: #F3F4F6;
+  color: #374151;
+}
+
+.inkly-video-input {
+  width: 100%;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: #141414;
+  outline: none;
+  transition: border-color 0.15s;
+  margin-bottom: 6px;
+  font-family: "JetBrains Mono", monospace;
+  box-sizing: border-box;
+}
+
+.inkly-video-input:focus {
+  border-color: #FF6A00;
+}
+
+.inkly-video-input::placeholder {
+  color: #9CA3AF;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+}
+
+.inkly-video-error {
+  font-size: 12px;
+  color: #DC2626;
+  margin: 0 0 10px;
+}
+
+.inkly-video-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.inkly-video-btn-primary {
+  flex: 1;
+  height: 38px;
+  border: none;
+  border-radius: 9px;
+  background: #FF6A00;
+  color: white;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.inkly-video-btn-primary:hover {
+  background: #E85F00;
+}
+
+.inkly-video-btn-secondary {
+  height: 38px;
+  padding: 0 16px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 9px;
+  background: white;
+  color: #374151;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.inkly-video-btn-secondary:hover {
+  background: #F9FAFB;
+}
+
+/* ── Slash command menu ── */
+.inkly-slash-wrapper {
+  position: absolute;
+  z-index: 50;
+  width: 270px;
+}
+
+.inkly-slash-menu {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.inkly-slash-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.inkly-slash-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: background 0.1s;
+}
+
+.inkly-slash-item:hover {
+  background: #F5F5F5;
+}
+
+.inkly-slash-item--active {
+  background: #FFF3E8;
+  border-left: 2px solid #FF6A00;
+  padding-left: 8px;
+}
+
+.inkly-slash-item--active .inkly-slash-title {
+  color: #FF6A00;
+  font-weight: 600;
+}
+
+.inkly-slash-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #F3F4F6;
+  color: #374151;
+  flex-shrink: 0;
+  transition: background 0.1s, color 0.1s;
+}
+
+.inkly-slash-item--active .inkly-slash-icon {
+  background: #FFE9D6;
+  color: #FF6A00;
+}
+
+.inkly-slash-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.inkly-slash-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #141414;
+  line-height: 1.3;
+}
+
+.inkly-slash-desc {
+  font-size: 11px;
+  color: #9CA3AF;
+  line-height: 1.3;
+}
+
+/* ── Upload toast ── */
+.inkly-upload-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: white;
+  border: 1px solid #E8E3DD;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  color: #374151;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .inkly-editor-content {
+    min-height: 180px;
+    font-size: 17px;
+  }
+
+  .inkly-editor-content h1 {
+    font-size: 1.75em;
+  }
+
+  .inkly-editor-content h2 {
+    font-size: 1.4em;
+  }
+
+  .inkly-editor-content h3 {
+    font-size: 1.15em;
+  }
+
+  .inkly-slash-wrapper {
+    width: 240px;
+  }
+
+  .inkly-link-input {
+    width: 140px;
+  }
+
+  .inkly-video-popover {
+    width: 100%;
+    max-width: calc(100vw - 32px);
+  }
+}
